@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Menu, ArrowRight, Leaf } from "lucide-react";
+import { ArrowRight, Leaf } from "lucide-react";
+import Navigation from "@/components/Navigation";
 import RobotAnimation from "@/components/RobotAnimation";
 import HowItWorks from "@/components/HowItWorks";
 import FeaturesGrid from "@/components/FeaturesGrid";
@@ -15,18 +16,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-grid flex flex-col items-center justify-start text-foreground overflow-hidden">
       
-      {/* Navigation Bar */}
-      <nav className="w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center z-10">
-        <div className="flex items-center space-x-2">
-          {/* Logo */}
-          <span className="text-xl md:text-2xl font-bold text-[#D0BCFF]">
-            RecruiterAI
-          </span>
-        </div>
-        <button className="p-2 -mr-2 text-white hover:text-gray-300 transition-colors">
-          <Menu className="w-6 h-6" />
-        </button>
-      </nav>
+      {/* Mega Menu Navigation */}
+      <Navigation />
 
       {/* Hero Section */}
       <main className="flex-grow flex flex-col items-center justify-center text-center px-4 md:px-6 z-10 w-full max-w-7xl mt-20 mb-12">
