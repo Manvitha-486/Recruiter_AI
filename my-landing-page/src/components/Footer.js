@@ -4,7 +4,7 @@ import { Share2, Globe, MessageSquare } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#080808] border-t border-white/5 pt-20 pb-10 px-6 relative z-10">
+    <footer className="w-full bg-transparent border-t border-white/5 pt-20 pb-10 px-6 relative z-10">
       <div className="max-w-7xl mx-auto w-full">
         
         {/* Top 4-Column Grid */}
@@ -69,7 +69,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 text-[#666677] text-sm">
-          <p>
+          <p className="text-center lg:text-left">
             © {new Date().getFullYear()} RecruiterAI Inc. All rights reserved. Built with precision for the modern workforce.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-8">

@@ -32,19 +32,22 @@ export default function FAQ() {
   };
 
   return (
-    <section className="w-full max-w-4xl mx-auto py-24 px-6 relative z-10 flex flex-col items-center">
+    <section className="w-full py-16 md:py-24 relative z-10 flex flex-col items-center">
       
-      {/* Heading */}
-      <motion.h2 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.5 }}
-        transition={{ duration: 0.6 }}
-        className="text-[2.2rem] md:text-5xl font-bold tracking-tight mb-16 text-center shadow-sm"
-      >
-        <span className="text-white">REAL ANSWERS.</span>
-        <span className="text-[#D0BCFF]">NO FLUFF.</span>
-      </motion.h2>
+
+
+      <div className="w-full max-w-4xl mx-auto px-6 flex flex-col items-center relative z-20">
+        {/* Heading */}
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl sm:text-[2.2rem] md:text-5xl font-bold tracking-tight mb-10 md:mb-16 text-center shadow-sm flex flex-col items-center justify-center gap-1 sm:block"
+        >
+          <span className="text-white">REAL ANSWERS. </span>
+          <span className="text-[#D0BCFF]">NO FLUFF.</span>
+        </motion.h2>
 
       {/* FAQ List */}
       <div className="w-full flex flex-col gap-4">
@@ -66,13 +69,13 @@ export default function FAQ() {
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-6 md:py-8 flex items-center justify-between focus:outline-none"
+                className="w-full px-4 sm:px-6 py-5 md:py-8 flex items-center justify-between focus:outline-none"
               >
-                <div className="flex items-center gap-4 text-left">
-                  <span className="text-[#B197FC] font-semibold text-lg md:text-xl w-8">
+                <div className="flex items-center gap-3 sm:gap-4 text-left pr-2">
+                  <span className="text-[#B197FC] font-semibold text-lg md:text-xl w-8 shrink-0">
                     0{index + 1}.
                   </span>
-                  <span className="text-gray-200 font-medium text-base md:text-[1.1rem]">
+                  <span className="text-gray-200 font-medium text-[15px] sm:text-base md:text-[1.1rem] leading-snug">
                     {faq.question}
                   </span>
                 </div>
@@ -93,8 +96,8 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
-                    <div className="px-6 pb-8 pt-0 pl-[4.5rem] pr-12">
-                      <p className="text-gray-400 leading-relaxed text-[15px] md:text-base">
+                    <div className="px-4 sm:px-6 pb-6 md:pb-8 pt-0 pl-[3.5rem] sm:pl-[4.5rem] pr-6 md:pr-12">
+                      <p className="text-gray-400 leading-relaxed text-[14px] sm:text-[15px] md:text-base">
                         {faq.answer}
                       </p>
                     </div>
@@ -105,7 +108,7 @@ export default function FAQ() {
           );
         })}
       </div>
-
+      </div>
     </section>
   );
 }

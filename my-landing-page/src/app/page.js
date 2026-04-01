@@ -11,100 +11,83 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import Statement from "@/components/Statement";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-grid flex flex-col items-center justify-start text-foreground overflow-hidden">
+    <div className="min-h-screen bg-black flex flex-col overflow-hidden font-sans">
       
       {/* Mega Menu Navigation */}
       <Navigation />
 
-      {/* Hero Section */}
-      <main className="flex-grow flex flex-col items-center justify-center text-center px-4 md:px-6 z-10 w-full max-w-7xl mt-20 mb-12">
-        
-        {/* Animated Heading */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full max-w-none px-4 mx-auto mb-12"
-        >
-          <h1 className="text-[54px] font-medium tracking-tight text-gray-200 leading-[1.1]">
-            <span className="md:whitespace-nowrap">Design Your Hiring Strategy Once.</span><br />
-            Watch It Run Itself-<span className="font-extrabold text-white">Every Time</span>
-          </h1>
-        </motion.div>
+      {/* Hero Section - Black */}
+      <section className="relative w-full bg-black bg-grid flex flex-col items-start justify-start min-h-[75vh] pt-20 pb-20 px-6 md:px-12 lg:px-24">
+        <div className="max-w-7xl mx-auto w-full z-10 flex flex-col gap-6">
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-[90px] font-serif leading-[1] md:leading-[0.9] tracking-tight text-[#f4f4f5]"
+          >
+            Your hiring process,<br />
+            minus the manual work.
+          </motion.h1>
 
-        {/* CTA Buttons */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-6 w-full max-w-3xl mx-auto mb-10"
-        >
-          <button className="group relative overflow-hidden rounded-full px-8 py-4 bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white font-medium text-base flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] transition-all duration-300 w-full sm:w-auto">
-            <span className="relative z-10 flex items-center gap-2">
-              Start Hiring Smarter
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </button>
-          
-          <button className="relative rounded-full px-8 py-4 bg-[#404040]/20 border border-[#737373] hover:border-[#A5D8FF] hover:bg-[#404040]/40 backdrop-blur-md text-gray-200 font-medium text-base transition-all duration-300 flex items-center justify-center w-full sm:w-auto">
-            Book a demo
-          </button>
-        </motion.div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="mt-6"
+          >
+            <a href="#" className="flex items-center gap-2 text-[#3B82F6] hover:text-[#3B82F6]/80 text-lg md:text-xl font-medium transition-colors">
+              See it in action <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+            </a>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Labels below CTA */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 w-full max-w-4xl mx-auto"
-        >
-          {/* Laurel Label 1 */}
-          <div className="flex items-center gap-3">
-            <Leaf className="w-5 h-5 md:w-6 md:h-6 text-[#A5D8FF] scale-x-[-1] -rotate-12 opacity-80 flex-shrink-0" />
-            <span className="text-sm md:text-base font-semibold text-gray-200 tracking-wider">
-              Backed by CHRO
-            </span>
-            <Leaf className="w-5 h-5 md:w-6 md:h-6 text-[#A5D8FF] rotate-12 opacity-80 flex-shrink-0" />
-          </div>
-
-          {/* Laurel Label 2 */}
-          <div className="flex items-center gap-3">
-            <Leaf className="w-5 h-5 md:w-6 md:h-6 text-[#D0BCFF] scale-x-[-1] -rotate-12 opacity-80 flex-shrink-0" />
-            <span className="text-sm md:text-base font-semibold text-gray-200 tracking-wider">
-              Powered by recruiting agents
-            </span>
-            <Leaf className="w-5 h-5 md:w-6 md:h-6 text-[#D0BCFF] rotate-12 opacity-80 flex-shrink-0" />
-          </div>
-        </motion.div>
-
-      </main>
-
-      {/* Interactive Loop Animation Section */}
+      {/* Full-width Collins style Video Expand */}
       <RobotAnimation />
 
-      {/* Timeline Scroll Tracking Section */}
-      <HowItWorks />
+      {/* High-Impact Statement Section - Black */}
+      <section className="relative w-full bg-black bg-grid flex items-center justify-center overflow-hidden">
+        <Statement />
+      </section>
 
-      {/* 3x2 Floating Cards Feature Grid */}
-      <FeaturesGrid />
+      {/* Timeline Scroll Tracking Section - Black/White Alternating (Kept Black to match internal styles) */}
+      <section className="w-full bg-black bg-grid text-white">
+        <HowItWorks />
+      </section>
 
-      {/* Massive Metrics Bento Grid */}
-      <MetricsBento />
+      {/* 3x2 Floating Cards Feature Grid - Light */}
+      <section className="w-full bg-white text-black border-y border-gray-200 relative z-10">
+        <FeaturesGrid />
+      </section>
 
-      {/* Elegant Typography Testimonials Carousel */}
-      <Testimonials />
+      {/* Massive Metrics Bento Grid - Black */}
+      <section className="w-full bg-black bg-grid text-white">
+        <MetricsBento />
+      </section>
 
-      {/* Accordion FAQ Section */}
-      <FAQ />
+      {/* Elegant Typography Testimonials Carousel - White */}
+      <section className="w-full bg-white text-black border-y border-gray-200">
+        <Testimonials />
+      </section>
 
-      {/* Vibrant Floating Doodles CTA Section */}
-      <CTA />
+      {/* Accordion FAQ Section - Black */}
+      <section className="w-full bg-black bg-grid text-white">
+        <FAQ />
+      </section>
 
-      {/* Global Page Footer */}
-      <Footer />
+      {/* Simple Bold CTA Section */}
+      <section className="w-full">
+        <CTA />
+      </section>
+
+      {/* Global Page Footer - Black */}
+      <section className="w-full bg-black bg-grid text-white">
+        <Footer />
+      </section>
 
     </div>
   );

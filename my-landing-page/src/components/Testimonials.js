@@ -49,8 +49,8 @@ export default function Testimonials() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="mb-6"
       >
-        <div className="w-16 h-16 rounded-full bg-[#1A1A1A] border border-white/5 flex items-center justify-center shadow-xl">
-          <Quote className="text-[#A5D8FF] w-8 h-8" strokeWidth={1.5} />
+        <div className="w-16 h-16 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center shadow-sm">
+          <Quote className="text-[#3B82F6] w-8 h-8" strokeWidth={1.5} />
         </div>
       </motion.div>
 
@@ -60,14 +60,14 @@ export default function Testimonials() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="text-3xl md:text-5xl font-bold text-white text-center tracking-tight mb-16 leading-tight max-w-3xl"
+        className="text-3xl md:text-5xl font-bold text-black text-center tracking-tight mb-8 md:mb-16 leading-tight max-w-3xl px-4"
       >
         Built for people doing the work. <br className="hidden md:block" />
-        <span className="text-gray-400">Used by those who move fast.</span>
+        <span className="text-black">Used by those who move fast.</span>
       </motion.h2>
 
       {/* Floating Typography Carousel Container (No Cards!) */}
-      <div className="relative w-full h-[280px] md:h-[220px] flex items-center justify-center">
+      <div className="relative w-full h-[360px] sm:h-[280px] md:h-[220px] flex items-center justify-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -78,17 +78,17 @@ export default function Testimonials() {
             className="absolute flex flex-col items-center text-center w-full px-4"
           >
             {/* The Quote itself */}
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-relaxed md:leading-snug mb-10 max-w-4xl tracking-tight">
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-gray-500 leading-relaxed md:leading-snug mb-8 md:mb-10 max-w-4xl tracking-tight">
               "{testimonials[currentIndex].quote}"
             </h3>
             
             {/* Author Block */}
             <div className="flex items-center justify-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#A5D8FF] to-[#D0BCFF] flex items-center justify-center text-black font-bold text-lg shadow-[0_0_20px_rgba(208,188,255,0.3)]">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#E0F2FE] to-[#F3E8FF] flex items-center justify-center text-black font-bold text-lg border border-gray-200 shadow-sm">
                 {testimonials[currentIndex].initials}
               </div>
               <div className="flex flex-col items-start">
-                <span className="text-white font-bold tracking-wide">{testimonials[currentIndex].name}</span>
+                <span className="text-gray-600 font-bold tracking-wide">{testimonials[currentIndex].name}</span>
                 <span className="text-gray-400 text-sm">{testimonials[currentIndex].role}</span>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function Testimonials() {
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
-            className="relative h-1.5 w-16 md:w-24 bg-white/10 rounded-full overflow-hidden hover:bg-white/20 transition-colors"
+            className="relative h-1.5 w-16 md:w-24 bg-black/10 rounded-full overflow-hidden hover:bg-black/20 transition-colors"
             aria-label={`Go to testimonial ${idx + 1}`}
           >
             {/* The filling progress bar for the active slide */}
@@ -112,13 +112,13 @@ export default function Testimonials() {
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 6, ease: "linear" }}
-                className="absolute top-0 left-0 h-full bg-[#D0BCFF] shadow-[0_0_10px_rgba(208,188,255,0.8)] rounded-full"
+                className="absolute top-0 left-0 h-full bg-black rounded-full"
               />
             )}
             
             {/* Keep previously viewed bars dimly filled for context */}
             {idx < currentIndex && (
-              <div className="absolute top-0 left-0 h-full w-full bg-white/40 rounded-full" />
+              <div className="absolute top-0 left-0 h-full w-full bg-black/30 rounded-full" />
             )}
           </button>
         ))}
