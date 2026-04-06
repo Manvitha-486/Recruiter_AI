@@ -1,51 +1,60 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Statement() {
-  const containerRef = useRef(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 70%", "end 40%"]
-  });
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  // Map scroll progress to text color from a very dark grey to pure white sequentially
-  const color1 = useTransform(scrollYProgress, [0, 0.25], ["#27272A", "#FFFFFF"]);
-  const color2 = useTransform(scrollYProgress, [0.25, 0.5], ["#27272A", "#FFFFFF"]);
-  const color3 = useTransform(scrollYProgress, [0.5, 0.75], ["#27272A", "#FFFFFF"]);
-
-  // Map scroll progress to a blur effect for a cinematic "glowing" focus-in
-  const filter1 = useTransform(scrollYProgress, [0, 0.25], ["blur(3px)", "blur(0px)"]);
-  const filter2 = useTransform(scrollYProgress, [0.25, 0.5], ["blur(3px)", "blur(0px)"]);
-  const filter3 = useTransform(scrollYProgress, [0.5, 0.75], ["blur(3px)", "blur(0px)"]);
+  const items = [
+    { text: "Connect the platforms you already use." },
+    { text: "Build your hiring strategy once. Run it across multiple roles." },
+    { text: "Never lose a candidate to a missed follow-up." }
+  ];
 
   return (
-    <div 
-      ref={containerRef} 
-      className="w-full max-w-5xl mx-auto py-24 md:py-32 px-6 md:px-12 z-10 flex flex-col justify-center items-center min-h-[50vh]"
-    >
-      {/* Brand Eyebrow */}
-      <span className="text-[#B197FC] uppercase tracking-[0.2em] text-sm md:text-md font-bold mb-12 opacity-80">
-        The Reality
-      </span>
+    <div className="w-full bg-[#FAFAFA] py-24 md:py-32 px-4 md:px-12 z-10 flex flex-col justify-center items-center">
+      <div className="w-full max-w-6xl mx-auto flex flex-col relative" onMouseLeave={() => setHoveredIndex(null)}>
+        
+        {/* Headline */}
+        <div className="w-full text-center mb-16 md:mb-24">
+          <h2 className="text-[40px] md:text-6xl lg:text-[80px] font-serif font-medium text-gray-900 leading-[1.1]">
+            Hiring, Simplified.
+          </h2>
+        </div>
 
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-[1.3] md:leading-[1.4] tracking-tight flex flex-col gap-10 md:gap-14 w-full text-center max-w-4xl mx-auto">
-        
-        <motion.span style={{ color: color1, filter: filter1 }} className="transition-all duration-300">
-          What if the role stayed open for 3 months not because no one was right but because the right person never saw it?
-        </motion.span>
-        
-        <motion.span style={{ color: color2, filter: filter2 }} className="transition-all duration-300">
-          What if 300 resumes sorted themselves before your coffee?
-        </motion.span>
-        
-        <motion.span style={{ color: color3, filter: filter3 }} className="transition-all duration-300">
-          What if the perfect candidate replied in seconds, instead of weeks?
-        </motion.span>
+        {/* Top Border for first item */}
+        <div className="w-full h-px bg-gray-200" />
 
-      </h2>
+        {items.map((item, i) => (
+          <div 
+            key={i}
+            onMouseEnter={() => setHoveredIndex(i)}
+            className="relative w-full py-10 md:py-14 cursor-pointer group"
+          >
+            {/* Bottom Border for every item */}
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gray-200 z-0" />
+
+            {/* The Animated Hover Pill Background - slides fluidly between hovered rows */}
+            {hoveredIndex === i && (
+              <motion.div
+                layoutId="statementHoverPill"
+                className="absolute inset-x-0 top-1 bottom-1 bg-[#1A1513] rounded-[24px] md:rounded-[32px] z-0"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+              />
+            )}
+
+            <div className={`relative z-10 flex items-center justify-center px-4 md:px-10 transition-colors duration-300 ${hoveredIndex === i ? 'text-white' : 'text-gray-400'}`}>
+              
+              {/* Sentence */}
+              <h3 className={`text-base sm:text-xl md:text-[26px] lg:text-[32px] xl:text-[36px] font-medium whitespace-nowrap tracking-tight w-full max-w-full transition-colors duration-300 ${hoveredIndex === i ? 'text-white' : 'text-[#A3A3A3]'}`}>
+                {item.text}
+              </h3>
+
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

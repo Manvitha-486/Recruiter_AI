@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { Target, Shield, Zap, Rocket, TrendingUp, Users } from "lucide-react";
 
 // Replacing standard icons with high-quality emojis ("doodles") to match cosmos.so style
 const metrics = [
@@ -9,37 +10,37 @@ const metrics = [
     number: "73%",
     title: "COMPLETION RATE",
     description: "Candidates effortlessly complete our AI-driven process without friction or drop-offs.",
-    emoji: "🎯",
+    icon: Target,
   },
   {
     number: "66%",
     title: "FEWER BAD HIRES",
     description: "Advanced insights verify true capabilities, dramatically reducing costly turnover.",
-    emoji: "🛡️",
+    icon: Shield,
   },
   {
     number: "80%",
     title: "FASTER VERIFICATION",
     description: "Automated checks replace days of manual reference gathering with instant approvals.",
-    emoji: "⚡",
+    icon: Zap,
   },
   {
     number: "33%",
     title: "FASTER HIRING",
     description: "Close top talent before competitors even schedule their first screening call.",
-    emoji: "🚀",
+    icon: Rocket,
   },
   {
     number: "89%",
     title: "HIGHER APPLICATION RATES",
     description: "A candidate experience so smooth they actually want to finish submitting their profile.",
-    emoji: "📈",
+    icon: TrendingUp,
   },
   {
     number: "10X",
     title: "MORE RESUMES PROCESSED",
     description: "Scale your recruiting pipeline effortlessly without adding headcount to your HR team.",
-    emoji: "💪",
+    icon: Users, // Or Users
   }
 ];
 
@@ -54,6 +55,8 @@ function MetricCard({ metric, index, scrollYProgress, springProgress }) {
   const rotateOffset = useTransform(springProgress, [start, end], [isLeftColumn ? -15 : 15, 0]);
   const scaleOffset = useTransform(springProgress, [start, end], [0.8, 1]);
   const opacityOffset = useTransform(scrollYProgress, [start, start + 0.15], [0, 1]);
+
+  const Icon = metric.icon;
 
   return (
     <motion.div
@@ -71,12 +74,10 @@ function MetricCard({ metric, index, scrollYProgress, springProgress }) {
       {/* Optional glowing gradient inside - subtle purple */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#B197FC]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-      {/* Floating Doodle Top Right */}
-      <div className="absolute top-8 right-8">
-        <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-gradient-to-b from-[#222222] to-[#111111] border border-[#333333] flex items-center justify-center shadow-[0_10px_20px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-all duration-500 ease-out z-20">
-          <span className="text-2xl md:text-3xl filter drop-shadow-[0_0_8px_rgba(255,255,255,0.15)] saturate-[1.2] transition-all duration-500">
-            {metric.emoji}
-          </span>
+      {/* Floating Outline Icon Top Right */}
+      <div className="absolute top-8 right-8 md:top-10 md:right-10">
+        <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center border border-[#333333] group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500 shadow-sm z-20">
+          <Icon size={24} strokeWidth={1.5} className="text-gray-400 group-hover:text-white transition-colors duration-500 relative z-10" />
         </div>
       </div>
 

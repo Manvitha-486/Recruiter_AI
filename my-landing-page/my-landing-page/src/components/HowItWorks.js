@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layers, Sparkles, Calendar, Video, CheckCircle2, Linkedin } from "lucide-react";
+import { Layers, Sparkles, Calendar, Video, CheckCircle2, Linkedin, ArrowRight, ArrowDown } from "lucide-react";
 
 const nodeVariants = {
   hidden: { scale: 0.6, opacity: 0, filter: "blur(4px)", y: -20 },
@@ -309,51 +309,21 @@ export default function HowItWorks() {
         </motion.p>
       </div>
 
-      {/* Dynamic Context Label */}
-      <div className="h-8 mb-12 flex justify-center items-center">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSequence.message}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.4 }}
-            className="px-6 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 shadow-[0_0_20px_rgba(59,130,246,0.15)] flex items-center justify-center"
-          >
-            <span className="text-blue-400 font-semibold tracking-wide text-[11px] md:text-[13px] uppercase">
-              {activeSequence.message}
-            </span>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+
 
       {/* Node Flow Diagram area */}
       <div className="relative w-full max-w-5xl mx-auto min-h-[220px] flex items-center justify-center">
         
         {/* The Animated Grid Nodes */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-6 md:gap-12 z-10 w-full px-2 relative">
+        <div className="flex flex-col md:flex-row items-center justify-center z-10 w-full px-2 relative">
           
-          {/* Desktop horizontal line */}
-          <div className="absolute hidden md:block left-[5%] right-[5%] h-[1px] bg-gray-800/80 z-0 top-[40px] -translate-y-1/2" />
-          <motion.div 
-            className="absolute hidden md:block h-[3px] w-6 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.8)] z-0 top-[40px] -translate-y-1/2"
-            animate={{ left: ["5%", "95%", "95%", "5%"] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          />
-
-          {/* Mobile vertical line */}
-          <div className="absolute md:hidden top-[5%] bottom-[5%] w-[1px] bg-gray-800/80 z-0 left-[50%] -translate-x-1/2" />
-          <motion.div 
-            className="absolute md:hidden w-[3px] h-6 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.8)] z-0 left-[50%] -translate-x-1/2"
-            animate={{ top: ["5%", "95%", "95%", "5%"] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          />
-
           <AnimatePresence mode="popLayout">
-            {activeSequence.nodes.map((nodeId) => {
+            {activeSequence.nodes.flatMap((nodeId, index) => {
               const node = allNodes[nodeId];
+              const isLast = index === activeSequence.nodes.length - 1;
+              const nextNodeId = !isLast ? activeSequence.nodes[index + 1] : null;
               
-              return (
+              const nodeEl = (
                 <motion.div
                   layout
                   layoutId={nodeId} // crucial for structural reordering recognition
@@ -366,7 +336,7 @@ export default function HowItWorks() {
                   className="flex flex-col items-center gap-4"
                 >
                   <div className="w-14 h-14 md:w-20 md:h-20 relative flex items-center justify-center transition-colors duration-500 bg-white/10 backdrop-blur-xl border border-white/30 shadow-[0_0_25px_rgba(255,255,255,0.2),inset_0_0_15px_rgba(255,255,255,0.1)] text-white z-10 rounded-md">
-                    {/* Tiny pulsing dot to visually indicate the active path over the line */}
+                    {/* Tiny pulsing dot to visually indicate the active processing step */}
                     {nodeId === "screening" && (
                       <motion.div 
                         className="absolute -top-3 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-blue-500"
@@ -385,6 +355,40 @@ export default function HowItWorks() {
                   </div>
                 </motion.div>
               );
+
+              const arrowEl = !isLast ? (
+                <motion.div
+                  layout
+                  key={`arrow-${nodeId}-${nextNodeId}`}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col items-center justify-center md:-translate-y-[14px]" 
+                >
+                  {/* Desktop Edge-Touching Dotted Arrow */}
+                  <div className="hidden md:flex w-8 lg:w-16 h-px items-center relative text-gray-500">
+                    <svg width="100%" height="2" className="overflow-visible absolute left-0 right-0">
+                      <line x1="0" y1="1" x2="100%" y2="1" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" />
+                    </svg>
+                    <svg className="w-[10px] h-[10px] absolute right-0 fill-current" viewBox="0 0 10 10">
+                      <polygon points="0,0 10,5 0,10" />
+                    </svg>
+                  </div>
+                  
+                  {/* Mobile Edge-Touching Dotted Arrow */}
+                  <div className="flex md:hidden h-10 sm:h-12 w-px justify-center relative text-gray-500">
+                    <svg height="100%" width="2" className="overflow-visible absolute top-0 bottom-0">
+                      <line x1="1" y1="0" x2="1" y2="100%" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" />
+                    </svg>
+                    <svg className="w-[10px] h-[10px] absolute bottom-0 -translate-x-[5px] fill-current" viewBox="0 0 10 10">
+                      <polygon points="0,0 10,0 5,10" />
+                    </svg>
+                  </div>
+                </motion.div>
+              ) : null;
+
+              return isLast ? [nodeEl] : [nodeEl, arrowEl];
             })}
           </AnimatePresence>
         </div>
@@ -396,7 +400,7 @@ export default function HowItWorks() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="mt-8 text-[#666666] font-medium text-[13px] md:text-sm tracking-wide"
+        className="mt-12 text-[#666666] font-medium text-[13px] md:text-sm tracking-wide"
       >
         Works for any role. Any industry. Connected in minutes.
       </motion.p>

@@ -20,14 +20,14 @@
   --color-accent-3: var(--accent-3);
   --color-secondary: var(--secondary);
   --color-secondary-bg: var(--secondary-bg);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), sans-serif;
+  --font-serif: var(--font-playfair), serif;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
   margin: 0;
   overflow-x: hidden;
 }
@@ -47,16 +47,19 @@ body {
 
 /* Tines-inspired light grid background */
 .bg-grid {
-  background-size: 120px 120px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 1440px 720px;
+  background-position: center top;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='720'%3E%3Cdefs%3E%3Cpattern id='g1' width='120' height='120' patternUnits='userSpaceOnUse'%3E%3Cpath d='M120 0H0v120' fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g1)'/%3E%3Crect x='0' y='240' width='120' height='120' fill='rgba(255,255,255,0.03)'/%3E%3Crect x='120' y='480' width='120' height='120' fill='rgba(255,255,255,0.02)'/%3E%3Crect x='240' y='120' width='120' height='120' fill='rgba(255,255,255,0.025)'/%3E%3Crect x='1080' y='360' width='120' height='120' fill='rgba(255,255,255,0.03)'/%3E%3Crect x='960' y='600' width='120' height='120' fill='rgba(255,255,255,0.015)'/%3E%3Crect x='1320' y='120' width='120' height='120' fill='rgba(255,255,255,0.035)'/%3E%3C/svg%3E");
 }
 
 /* Tines-inspired dark grid background for white sections */
 .bg-grid-dark {
-  background-size: 120px 120px;
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 1440px 720px;
+  background-position: center top;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='720'%3E%3Cdefs%3E%3Cpattern id='g2' width='120' height='120' patternUnits='userSpaceOnUse'%3E%3Cpath d='M120 0H0v120' fill='none' stroke='rgba(0,0,0,0.1)' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g2)'/%3E%3Crect x='0' y='240' width='120' height='120' fill='rgba(0,0,0,0.03)'/%3E%3Crect x='120' y='480' width='120' height='120' fill='rgba(0,0,0,0.02)'/%3E%3Crect x='240' y='120' width='120' height='120' fill='rgba(0,0,0,0.025)'/%3E%3Crect x='1080' y='360' width='120' height='120' fill='rgba(0,0,0,0.03)'/%3E%3Crect x='960' y='600' width='120' height='120' fill='rgba(0,0,0,0.015)'/%3E%3Crect x='1320' y='120' width='120' height='120' fill='rgba(0,0,0,0.035)'/%3E%3C/svg%3E");
+}
+
+/* Grainy noise background utility */
+.noise-bg {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.3' style='mix-blend-mode: overlay;' /%3E%3C/svg%3E");
 }

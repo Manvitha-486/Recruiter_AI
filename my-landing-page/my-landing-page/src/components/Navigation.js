@@ -8,9 +8,10 @@ export default function Navigation() {
     <nav className="relative w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center z-50">
       
       {/* Left: Logo */}
-      <div className="flex items-center space-x-2">
-        <span className="text-xl md:text-2xl font-bold text-white tracking-tight">
-          RecruiterAI
+      <div className="flex items-center gap-2 group cursor-pointer">
+        {/* Typography */}
+        <span className="text-xl md:text-2xl font-bold text-white tracking-tight flex items-baseline">
+          Recruiter<span className="font-extrabold">AI</span>
         </span>
       </div>
       
